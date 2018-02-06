@@ -1,6 +1,4 @@
 version: "3"
-environment:
-  - PASSWORD=Sa123456!
 
 services:
   visualizer:
