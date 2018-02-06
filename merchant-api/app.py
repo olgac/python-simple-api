@@ -5,8 +5,12 @@ import datetime
 app = Flask(__name__)
 
 @app.route("/")
+def welcome():
+    return "{ \"Welcome Merchant\": \"%s\" }\n" % ( "2.0")
+
+@app.route("/merchant")
 def info():
-    return "{ \"Datetime\": \"%s\", \"Hostname\": \"%s\", \"Application\": \"%s\", \"Verison\": \"%s\" }\n" % (datetime.datetime.now().strftime("%H:%M:%S.%f"), socket.gethostname(), "Merchant API", "1.0")
+    return "{ \"Time\": \"%s\", \"Hostname\": \"%s\", \"Application\": \"%s\", \"Verison\": \"%s\" }\n" % (datetime.datetime.now().strftime("%H:%M:%S.%f"), socket.gethostname(), "Merchant API", "2.0")
 
 @app.route("/health")
 def health():
