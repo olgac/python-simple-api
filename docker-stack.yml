@@ -27,15 +27,8 @@ services:
       - 5001:8080
     networks:
       - my-network
-    depends_on:
-      - redis
     deploy:
       replicas: 4
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
 
   merchant-api:
     image: olgac/merchant-api:1.0
