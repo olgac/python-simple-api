@@ -1,7 +1,5 @@
 FROM python:alpine
 
-MAINTAINER Ahmet Vehbi Olgaç, ahmetvehbiolgac@gmail.com
-
 ENV Environmet=DEV
 
 LABEL Group="API"
