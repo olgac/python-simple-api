@@ -4,9 +4,9 @@ import datetime
 
 app = Flask(__name__)
 
-@app.route("/merchant-info")
+@app.route("/")
 def info():
-    return "{ \"Datetime\": \"%s\", \"Hostname\": \"%s\", \"Application\": \"%s\", \"Verison\": \"%s\" }\n" % (datetime.datetime.now().strftime("%H:%M:%S.%f"), socket.gethostname(), "Merchant", "2.0")
+    return "{ \"Datetime\": \"%s\", \"Hostname\": \"%s\", \"Application\": \"%s\", \"Verison\": \"%s\" }\n" % (datetime.datetime.now().strftime("%H:%M:%S.%f"), socket.gethostname(), "Merchant API", "1.0")
 
 @app.route("/health")
 def health():
