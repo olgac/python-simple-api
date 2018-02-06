@@ -73,11 +73,8 @@ services:
 
   redis:
     image: redis:alpine
-    autorestart: always
     ports:
       - "6379"
-  # roles:
-  #   - global
     networks:
       - my-network
     deployment_strategy: high_availability
