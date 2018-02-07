@@ -9,7 +9,7 @@ services:
     networks:
       - my-network
     volumes:
-      - ./linkerd.yaml:/io.buoyant/linkerd.yaml:ro
+      - /var/git/:/io.buoyant/
     deploy:
       mode: global
     command: >
@@ -77,7 +77,6 @@ services:
       - "6379"
     networks:
       - my-network
-    deployment_strategy: high_availability
     deploy:
       replicas: 1
       restart_policy:
