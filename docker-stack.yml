@@ -9,11 +9,11 @@ services:
     networks:
       - my-network
     volumes:
-      - "/var/git/linkerd.yaml:/io.buoyant/linkerd.yaml:rw"
+      - "/var/git/linkerd.yml:/io.buoyant/linkerd.yml:rw"
     deploy:
       mode: global
     command: >
-      /io.buoyant/linkerd.yaml
+      /io.buoyant/linkerd.yml
 
   visualizer:
     image: dockersamples/visualizer:stable
