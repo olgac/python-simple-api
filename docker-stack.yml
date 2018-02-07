@@ -9,7 +9,7 @@ services:
     networks:
       - my-network
     volumes:
-      - /var/git/:/io.buoyant/
+      - /var/git/linkerd.yaml:/io.buoyant/linkerd.yaml
     deploy:
       mode: global
     command: >
