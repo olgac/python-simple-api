@@ -5,8 +5,8 @@ admin:
 routers:
 - protocol: http
   dtab: |
-    /svc/customer => /$/inet/127.1/5001;
-    /svc/merchant => /$/inet/127.1/5002;
+    /svc/customer => /$/inet/customer-api/8080;
+    /svc/merchant => /$/inet/merchant-api/8080;
   servers:
   - ip: 0.0.0.0
     port: 4140
