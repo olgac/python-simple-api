@@ -1,20 +1,31 @@
-from flask import Flask
-import socket
-import datetime
+from flask import Flask, jsonify
+import os
+import time
+import requests
 
 app = Flask(__name__)
 
+API = os.getenv('API')
+HOST = os.uname()[1]
+NAME = os.getenv('NAME')
+ENV = os.getenv('ENV')
+VERSION = os.getenv('VERSION')
+
 @app.route("/")
-def welcome():
-    return "{ \"Welcome Customer\": \"%s\" }\n" % ( "2.0")
+def root():
+    return jsonify(time=time.time(), host=HOST, name=NAME, env=ENV, version=VERSION)
 
-@app.route("/customer")
-def customer():
-    return "{ \"Time\": \"%s\", \"Host\": \"%s\", \"App\": \"%s\", \"Ver\": \"%s\" }\n" % (datetime.datetime.now().strftime("%H:%M:%S.%f"), socket.gethostname(), "Customer API", "2.0")
+@app.route("/live")
+def live():
+    return jsonify(status='OK')
 
-@app.route("/health")
-def health():
-    return "{ \"Status\": \"%s\" }\n" % ("UP")
+@app.route("/ready")
+def ready():
+    return jsonify(status='OK')
+
+@app.route("/connect")
+def connect():
+    return jsonify(requests.get(API).json())
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)

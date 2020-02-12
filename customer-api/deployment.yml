@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-api-deployment
+  namespace: default
+spec:
+  replicas: 3
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: customer-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: customer-api
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 15
+      containers:
+        - name: customer-api
+          image: olgac/customer-api:3.0
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: NAME
+              value: "customer-api"
+            - name: ENV
+              value: "stage"
+            - name: VERSION
+              value: "3.0"
+            - name: API
+              value: "https://httpbin.org/ip"
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 5
+            timeoutSeconds: 3
+            periodSeconds: 15
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 5
+            timeoutSeconds: 3
+            periodSeconds: 15
+            successThreshold: 1
+            failureThreshold: 5
+          resources:
+            limits:
+              cpu: 1k
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 128Mi

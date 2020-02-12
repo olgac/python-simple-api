@@ -1,21 +1,5 @@
-FROM python:alpine
-
-MAINTAINER Ahmet Vehbi Olgaç, ahmetvehbiolgac@gmail.com
-
-ENV Environmet=DEV
-
-LABEL Group="API"
-
-EXPOSE 8080
-
-WORKDIR /var/local/
-
-VOLUME ["/var/log", "/var/empty"]
-
+FROM python:3.8.1-alpine3.11
+WORKDIR /usr/local/bin
+RUN pip install flask requests
 COPY app.py .
-
-RUN apk add --no-cache curl && echo $(date) Merchant API runs on $HOSTNAME >> /var/log/api.log && pip install flask
-
-HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD curl -f http://localhost:8080/health || exit 1
-
 CMD [ "python", "./app.py" ]
